@@ -129,4 +129,22 @@ class MonitoredMessageControllerTest extends TestCase
             ->assertSee('Emergency delays were reported')
             ->assertSee('Detailed AI Findings');
     }
+
+    public function test_existing_message_can_be_reanalyzed(): void
+    {
+        config(['services.openai.key' => null]);
+        $message = MonitoredMessage::factory()->create([
+            'content' => 'The hospital team was helpful and professional.',
+            'source_url' => null,
+        ]);
+
+        $this->post(route('messages.reanalyze', $message))
+            ->assertRedirect(route('messages.show', $message));
+
+        $this->assertDatabaseHas('monitored_messages', [
+            'id' => $message->id,
+            'sentiment' => 'positive',
+            'crisis_level' => 'low',
+        ]);
+    }
 }

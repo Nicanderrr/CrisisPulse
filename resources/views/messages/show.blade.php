@@ -24,6 +24,10 @@
                     data-incident-read-aloud
                     data-incident="{{ e(json_encode($incidentPayload, JSON_UNESCAPED_SLASHES)) }}"
                 ><i class="bi bi-volume-up me-1"></i>Read Aloud</button>
+                <form method="POST" action="{{ route('messages.reanalyze', $message) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-dark"><i class="bi bi-arrow-repeat me-1"></i>Re-analyze</button>
+                </form>
                 <form method="POST" action="{{ route('messages.destroy', $message) }}">
                     @csrf
                     @method('DELETE')

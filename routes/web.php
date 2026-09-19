@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function (): void {
     Route::post('/assistant/action', [AssistantController::class, 'action'])->name('assistant.action');
     Route::post('/assistant/realtime/call', [AssistantController::class, 'realtimeCall'])->name('assistant.realtime.call');
     Route::post('/messages/import', [MonitoredMessageController::class, 'import'])->name('messages.import');
+    Route::post('/messages/{message}/reanalyze', [MonitoredMessageController::class, 'reanalyze'])->name('messages.reanalyze');
     Route::resource('messages', MonitoredMessageController::class)->only(['index', 'store', 'show', 'destroy']);
 
     Route::middleware('role:system_admin')->prefix('admin')->name('admin.')->group(function (): void {

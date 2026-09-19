@@ -80,6 +80,20 @@ class MonitoredMessageController extends Controller
         return view('messages.show', ['message' => $message]);
     }
 
+    public function reanalyze(MonitoredMessage $message, CrisisAnalysisService $analysis): RedirectResponse
+    {
+        $result = $analysis->analyze($message->content, $message->attachments ?? [], $message->source_url);
+
+        $message->update([
+            ...$result,
+            'analyzed_at' => now(),
+        ]);
+
+        return redirect()
+            ->route('messages.show', $message)
+            ->with('status', 'Message re-analyzed with the current AI configuration.');
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
