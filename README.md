@@ -1,4 +1,39 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CrisisPulse AI
+
+AI-based crisis communication monitoring and sentiment analysis for Korle Bu Teaching Hospital.
+
+## Features
+
+- Text, link, image, video, and CSV message analysis.
+- Sentiment, crisis-level, keywords, detailed findings, and response recommendations.
+- OpenAI Realtime conversational voice assistant with interruption support.
+- System Admin and Staff roles.
+- Admin-managed logo and login image/video branding.
+- Multiple evidence uploads with video audio/frame analysis.
+
+## Local setup
+
+```bash
+composer install
+copy .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+npm install
+npm run build
+php artisan storage:link
+php artisan serve
+```
+
+Default local accounts:
+
+```text
+System Admin: admin@gmail.com / password
+Staff:        staff@gmail.com / password
+```
+
+## Hostinger deployment
+
+See [HOSTINGER_DEPLOYMENT.md](HOSTINGER_DEPLOYMENT.md) for the production setup, document-root options, environment variables, database migration, storage link, permissions, and update commands.
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
